@@ -1,3 +1,5 @@
+import dev.failsafe.internal.util.Assert;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,13 +20,13 @@ public class Lunch_AndLearn_IOSAppium_CloudDevice_Automation
     public static void launchApp() throws MalformedURLException {
 
         caps= new XCUITestOptions();
-        caps.setCapability("bitbar_apiKey", "T0AiUh5MxFUhAucGFvlHXwW9jrH5hfYx");
+        caps.setCapability("bitbar_apiKey", "AI0fPQfmoYLwM4MDiSpRKp6a0kjEkTQY");
         caps.setCapability("appium:bitbar_device", "Apple iPhone SE 2020 A2296 13.4.1");
         caps.setCapability("platformName", "ios");
         caps.setCapability("appium:deviceName", "Apple iPhone SE 2020 A2296 13.4.1");
         caps.setCapability("automationName", "XCUITest");
         caps.setCapability("appium:bitbar_findDevice", "false");
-
+        caps.setCapability("appium:bundleId","com.apple.mobilecal");
         driver=new IOSDriver(new URL("https://eu-mobile-hub.bitbar.com/wd/hub"),caps);
 
     }
@@ -32,7 +34,9 @@ public class Lunch_AndLearn_IOSAppium_CloudDevice_Automation
     @Test
     public static void launchCalcApp()
     {
-        caps.setCapability("appium:bitbar_app", "189160073");
+
+        driver.findElement(AppiumBy.iOSNsPredicateString("name =='Inbox' AND value =='Inbox'")).click();
+        Assert.isTrue(driver.findElement(AppiumBy.iOSNsPredicateString("label =='Done'")).isDisplayed(),"Not Displayed");
 
     }
 
